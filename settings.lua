@@ -1,3 +1,5 @@
+local checkboxes = 0
+
 local settings = {
     {
         settingText = "Activer le pistage des kills",
@@ -9,14 +11,34 @@ local settings = {
         settingKey = "enableCurrencyTracking",
         settingTooltip = "Quand activé, comptabilise la monnaie accumulée.",
     }
-
     
 }
 
-local checkboxes = 0
+-- frame 
+local settingsFrame = CreateFrame("Frame", "ItemtrackerSettingsFrame", UIParent, "BasicFrameTemplateWithInset")
+settingsFrame:SetSize(400, 300)
+settingsFrame:SetPoint("CENTER")
+settingsFrame.TitleBg:SetHeight(30)
+settingsFrame.title = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+settingsFrame.title:SetPoint("CENTER", settingsFrame.TitleBg, "CENTER", 0, 3)
+settingsFrame.title:SetText("ItemTracker Settings")
+settingsFrame:Hide()
+settingsFrame:EnableMouse(true)
+settingsFrame:SetMovable(true)
+settingsFrame:RegisterForDrag("LeftButton")
+settingsFrame:SetScript("OnDragStart", function(self)
+	self:StartMoving()
+end)
+
+settingsFrame:SetScript("OnDragStop", function(self)
+	self:StopMovingOrSizing()
+end)
+
+
+
 
 local function CreateCheckbox(checkboxText, key, checkboxTooltip)
-    local checkbox = CreateFrame("CheckButton", "MyAddonCheckboxID" .. checkboxes, settingsFrame, "UICheckButtonTemplate")
+    local checkbox = CreateFrame("CheckButton", "ItemTrackerCheckboxID" .. checkboxes, settingsFrame, "UICheckButtonTemplate")
     checkbox.Text:SetText(checkboxText)
     checkbox:SetPoint("TOPLEFT", settingsFrame, "TOPLEFT", 10, -30 + (checkboxes * -30))
 
@@ -44,25 +66,6 @@ local function CreateCheckbox(checkboxText, key, checkboxTooltip)
     return checkbox
 end
 
--- frame 
-local settingsFrame = CreateFrame("Frame", "ItemtrackerSettingsFrame", UIParent, "BasicFrameTemplateWithInset")
-settingsFrame:SetSize(400, 300)
-settingsFrame:SetPoint("CENTER")
-settingsFrame.TitleBg:SetHeight(30)
-settingsFrame.title = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-settingsFrame.title:SetPoint("CENTER", settingsFrame.TitleBg, "CENTER", 0, -3)
-settingsFrame.title:SetText("ItemTracker Settings")
-settingsFrame:Hide()
-settingsFrame:EnableMouse(true)
-settingsFrame:SetMovable(true)
-settingsFrame:RegisterForDrag("LeftButton")
-settingsFrame:SetScript("OnDragStart", function(self)
-	self:StartMoving()
-end)
-
-settingsFrame:SetScript("OnDragStop", function(self)
-	self:StopMovingOrSizing()
-end)
 
 --eventlistener
 
@@ -92,7 +95,7 @@ local miniButton = LibStub("LibDataBroker-1.1"):NewDataObject("ItemTracker", {
 	icon = "Interface\\AddOns\\ItemTracker\\IT.tga",
 	OnClick = function(self, btn)
         if btn == "LeftButton" then
-		    MyAddon:ToggleMainFrame()
+		    ItemTracker:ToggleMainFrame()
         elseif btn == "RightButton" then
             if settingsFrame:IsShown() then
                 settingsFrame:Hide()
@@ -120,7 +123,15 @@ function addon:OnInitialize()
 		},
 	})
 
-	MyAddonMinimapButton:Register("ItemTracker", miniButton, self.db.profile.minimap)
+	ItemTrackerMinimapButton:Register("ItemTracker", miniButton, self.db.profile.minimap)
 end
 
-MyAddonMinimapButton:Show("ItemTracker")
+ItemTrackerMinimapButton:Show("ItemTracker")
+
+function ItemTracker:ToggleMainFrame()
+    if not mainFrame:IsShown() then
+        mainFrame:Show()
+    else
+        mainFrame:Hide()
+    end
+end

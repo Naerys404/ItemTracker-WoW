@@ -1,22 +1,13 @@
 ItemTracker = ItemTracker or {}
 
-function ItemTracker:ToggleMainFrame()
-    if not mainFrame:IsShown() then
-        mainFrame:Show()
-    else
-        mainFrame:Hide()
-    end
-end
-
-
 if not ItemTrackerDB then
     ItemTrackerDB = {}
 end
 
 -- set the frame
 
-local mainFrame = CreateFrame("Frame", "ItemTrackerMainFrame", UIParent, "BasicFrameTemplateWithInset")
-mainFrame:SetSize(500,350)
+mainFrame = CreateFrame("Frame", "ItemTrackerMainFrame", UIParent, "BasicFrameTemplateWithInset")
+mainFrame:SetSize(450,350)
 mainFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 mainFrame.TitleBg:SetHeight(30)
 mainFrame.title = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
@@ -42,7 +33,7 @@ end)
 -- set our name
 mainFrame.playerName = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.playerName:SetPoint("TOPLEFT", mainFrame, "TOPLEFT", 15, -35)
-mainFrame.playerName:SetText("Personnage: " .. UnitName('player') .. " ".. "(Level :" ..UnitLevel("player")..")")
+mainFrame.playerName:SetText("Personnage: " .. UnitName('player') .. " ".. "(Level : " ..UnitLevel("player")..")")
 
 -- show npc deaths in frame +golds
 mainFrame.totalPlayerKills = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
