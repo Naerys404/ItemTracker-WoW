@@ -65,9 +65,9 @@ mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerD
 mainFrame:SetScript("OnShow", function()
     PlaySound(808)
     mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
-    mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
-    mainFrame.currencySilver:SetText("|cFFC7C7C7Silver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
-    mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
+    mainFrame.currencyGold:SetText("|cFFFFD700Or: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
+    mainFrame.currencySilver:SetText("|cFFC7C7C7Argent: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
+    mainFrame.currencyCopper:SetText("|cFFD7BEA5Cuivre: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
 end)
 
 -- call the addon frame 
@@ -121,9 +121,9 @@ local function eventHandler(self, event, ...)
     end 
     if mainFrame:IsShown() then
         mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
-        mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
-        mainFrame.currencySilver:SetText("|cFFC7C7C7Silver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
-        mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
+        mainFrame.currencyGold:SetText("|cFFFFD700Or: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
+        mainFrame.currencySilver:SetText("|cFFC7C7C7Argent: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
+        mainFrame.currencyCopper:SetText("|cFFD7BEA5Cuivre: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
     end
     
 end
