@@ -51,7 +51,7 @@ mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.k
 
 mainFrame.totalCurrency = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.totalCurrency:SetPoint("TOPLEFT", mainFrame.totalPlayerKills, "BOTTOMLEFT", 0, -10)
-mainFrame.totalCurrency:SetText("Total Currency Collected:")
+mainFrame.totalCurrency:SetText("Total de monnaie collectée:")
 mainFrame.currencyGold = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.currencyGold:SetPoint("TOPLEFT", mainFrame.totalCurrency, "BOTTOMLEFT", 10, -15)
 mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
@@ -66,7 +66,7 @@ mainFrame:SetScript("OnShow", function()
     PlaySound(808)
     mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
     mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
-    mainFrame.currencySilver:SetText("|cFFC7C7C7FSilver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
+    mainFrame.currencySilver:SetText("|cFFC7C7C7Silver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
     mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
 end)
 
@@ -121,7 +121,6 @@ local function eventHandler(self, event, ...)
     end 
     if mainFrame:IsShown() then
         mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
-        mainFrame.totalPlayerKills:SetText("Total Kills: " .. (ItemTrackerDB.kills or "0"))
         mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
         mainFrame.currencySilver:SetText("|cFFC7C7C7Silver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
         mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
