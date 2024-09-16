@@ -1,0 +1,16 @@
+## Interface: 110002
+## Title: ItemTracker
+## Author: Naerys
+## Version: 1.0
+## Notes : Track if you already had an item with your character.
+## SavedVariables:
+## SavedVariablesPerCharacters: ItemTrackerDB
+
+# Libraries
+libs/Ace3/AceAddon-3.0/AceAddon-3.0.lua
+libs/Ace3/AceDB-3.0/AceDB-3.0.lua
+
+
+# Main Files
+main.lua
+settings.lua
