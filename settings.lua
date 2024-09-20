@@ -10,7 +10,12 @@ local settings = {
         settingText = "Activer le pistage de la monnaie",
         settingKey = "enableCurrencyTracking",
         settingTooltip = "Quand activé, comptabilise la monnaie accumulée.",
-    }
+    },
+    {
+        settingText = "Activer le pistage de la mort de votre personnage",
+        settingKey = "enableDeathsTracking",
+        settingTooltip = "Quand activé, comptabilise le nombre de fois où votre personnage est mort.",
+    },
     
 }
 
@@ -33,7 +38,6 @@ end)
 settingsFrame:SetScript("OnDragStop", function(self)
 	self:StopMovingOrSizing()
 end)
-
 
 
 
