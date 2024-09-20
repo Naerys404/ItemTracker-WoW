@@ -38,24 +38,25 @@ mainFrame.playerName:SetText("Personnage: " .. UnitName('player') .. " ".. "(Lev
 -- show npc deaths in frame +golds
 mainFrame.totalPlayerKills = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.totalPlayerKills:SetPoint("TOPLEFT", mainFrame.playerName, "BOTTOMLEFT", 0 , -10)
-mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
+
 
 mainFrame.totalCurrency = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.totalCurrency:SetPoint("TOPLEFT", mainFrame.totalPlayerKills, "BOTTOMLEFT", 0, -10)
 mainFrame.totalCurrency:SetText("Total de monnaie collectée:")
+
 mainFrame.currencyGold = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.currencyGold:SetPoint("TOPLEFT", mainFrame.totalCurrency, "BOTTOMLEFT", 10, -15)
-mainFrame.currencyGold:SetText("|cFFFFD700Gold: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
+
 mainFrame.currencySilver = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.currencySilver:SetPoint("TOPLEFT", mainFrame.currencyGold, "BOTTOMLEFT", 0, -15)
-mainFrame.currencySilver:SetText("|cFFC7C7C7FSilver: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
+
 mainFrame.currencyCopper = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 mainFrame.currencyCopper:SetPoint("TOPLEFT", mainFrame.currencySilver, "BOTTOMLEFT", 0, -15)
-mainFrame.currencyCopper:SetText("|cFFD7BEA5Copper: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
+
 
 mainFrame.totalDeaths = mainFrame:CreateFontString(nil, "OVERLAY", "GamefontNormal")
 mainFrame.totalDeaths:SetPoint("TOPLEFT", mainFrame.currencyCopper, "BOTTOMLEFT", -10 , -15)
-mainFrame.totalDeaths:SetText("|cFFef233cTotal de mort de votre personnage: " .. (ItemTrackerDB.deaths or "0"))
+
 
 mainFrame:SetScript("OnShow", function()
     PlaySound(808)
@@ -63,7 +64,7 @@ mainFrame:SetScript("OnShow", function()
     mainFrame.currencyGold:SetText("|cFFFFD700Or: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
     mainFrame.currencySilver:SetText("|cFFC7C7C7Argent: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
     mainFrame.currencyCopper:SetText("|cFFD7BEA5Cuivre: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
-    mainFrame.totalDeaths:SetText("|cFFef233cTotal de mort de votre personnage: " .. (ItemTrackerDB.deaths or "0"))
+    mainFrame.totalDeaths:SetText("|cFFef233cMorts de votre personnage: " .. (ItemTrackerDB.deaths or "0"))
 end)
 
 -- call the addon frame 
@@ -86,21 +87,28 @@ local eventListenerFrame = CreateFrame("Frame", "ItemTrackerEventListenerFrame",
 
 local function eventHandler(self, event, ...)
     local _, fightEventType = CombatLogGetCurrentEventInfo()
+    local myGUID = UnitGUID('player')
+    local timestamp, subevent, _, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = CombatLogGetCurrentEventInfo()
 
-    if event == "COMBAT_LOG_EVENT_UNFILTERED" and ItemTrackerDB.settingsKeys.enableKillTracking then
-        if fightEventType and fightEventType == "PARTY_KILL" then
+    if event == "COMBAT_LOG_EVENT_UNFILTERED"  then
+
+        if fightEventType and fightEventType == "PARTY_KILL" and ItemTrackerDB.settingsKeys.enableKillTracking then
             if not ItemTrackerDB.kills then
                 ItemTrackerDB.kills = 1
             else 
                 ItemTrackerDB.kills = ItemTrackerDB.kills + 1
             end
-        elseif fightEventType and fightEventType == "UNIT_DIED" then
-            
-            if not ItemTrackerDB.deaths then
-                ItemTrackerDB.deaths = 1
-            else 
-                ItemTrackerDB.deaths = ItemTrackerDB.deaths + 1
+
+        elseif fightEventType and fightEventType == "UNIT_DIED" and ItemTrackerDB.settingsKeys.enableDeathsTracking then
+            if subevent == "UNIT_DIED" and destGUID == myGUID then
+    
+                if not ItemTrackerDB.deaths then
+                    ItemTrackerDB.deaths = 1
+                else 
+                    ItemTrackerDB.deaths = ItemTrackerDB.deaths + 1
+                end
             end
+           
         end
     
     elseif event == "CHAT_MSG_MONEY" and ItemTrackerDB.settingsKeys.enableCurrencyTracking then
@@ -122,14 +130,13 @@ local function eventHandler(self, event, ...)
             ItemTrackerDB.gold = ItemTrackerDB.gold + math.floor(ItemTrackerDB.silver / 100)
             ItemTrackerDB.silver = ItemTrackerDB.silver % 100
         end
-        
-    end 
+    end
     if mainFrame:IsShown() then
         mainFrame.totalPlayerKills:SetText("Total d'ennemis tués: " .. (ItemTrackerDB.kills or "0"))
         mainFrame.currencyGold:SetText("|cFFFFD700Or: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
         mainFrame.currencySilver:SetText("|cFFC7C7C7Argent: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
         mainFrame.currencyCopper:SetText("|cFFD7BEA5Cuivre: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
-        mainFrame.totalDeaths:SetText("|cFFef233cTotal de mort de votre personnage: " .. (ItemTrackerDB.deaths or "0"))
+        mainFrame.totalDeaths:SetText("|cFFef233cMorts de votre personnage " .. (ItemTrackerDB.deaths or "0"))
     end
     
 end
