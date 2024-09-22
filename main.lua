@@ -7,7 +7,7 @@ end
 -- set the frame
 
 mainFrame = CreateFrame("Frame", "ItemTrackerMainFrame", UIParent, "BasicFrameTemplateWithInset")
-mainFrame:SetSize(450,350)
+mainFrame:SetSize(400,250)
 mainFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 mainFrame.TitleBg:SetHeight(30)
 mainFrame.title = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")

@@ -21,7 +21,7 @@ local settings = {
 
 -- frame 
 local settingsFrame = CreateFrame("Frame", "ItemtrackerSettingsFrame", UIParent, "BasicFrameTemplateWithInset")
-settingsFrame:SetSize(400, 300)
+settingsFrame:SetSize(350, 200)
 settingsFrame:SetPoint("CENTER")
 settingsFrame.TitleBg:SetHeight(30)
 settingsFrame.title = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
