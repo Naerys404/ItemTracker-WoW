@@ -136,7 +136,7 @@ local function eventHandler(self, event, ...)
         mainFrame.currencyGold:SetText("|cFFFFD700Or: |cFFFFFFFF" .. (ItemTrackerDB.gold or "0"))
         mainFrame.currencySilver:SetText("|cFFC7C7C7Argent: |cFFFFFFFF" .. (ItemTrackerDB.silver or "0"))
         mainFrame.currencyCopper:SetText("|cFFD7BEA5Cuivre: |cFFFFFFFF" .. (ItemTrackerDB.copper or "0"))
-        mainFrame.totalDeaths:SetText("|cFFef233cMorts de votre personnage " .. (ItemTrackerDB.deaths or "0"))
+        mainFrame.totalDeaths:SetText("|cFFef233cMorts de votre personnage: " .. (ItemTrackerDB.deaths or "0"))
     end
     
 end
