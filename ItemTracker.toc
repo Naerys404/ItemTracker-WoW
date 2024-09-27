@@ -2,7 +2,7 @@
 ## Title: ItemTracker
 ## Author: Naerys
 ## Version: 1.0
-## Notes : Track if you already had an item with your character.
+## Notes : Deaths / Kills & Money counter
 ## SavedVariables:
 ## SavedVariablesPerCharacters: ItemTrackerDB
 
